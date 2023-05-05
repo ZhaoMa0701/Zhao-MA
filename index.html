@@ -70,8 +70,16 @@
                     . I got my PhD degree at the
                     <span style="color: black; font-family: Times,sans-serif; font-size: medium; "> University of
                         Science and Technology of China</span>
-                    . Recently I'm working on 550 series quantum computer.
+                    . Recently I'm working on 550 series quantum computer. “550W” is the latest version of quantum computers and it has informed me of a special date, July 1st, 2058. I have set a countdown timer here to see what will happen.
                     <br>
+					<div  style="color: black; font-family: Times,sans-serif; font-size: medium; ">
+						COUNTDOWN：
+						<!-- /*<span id="zero"></span> Years  */ -->
+						<span id="one"></span> Days  
+						<span id="two"></span> Hours  
+						<span id="three"></span> Minutes  
+						<span id="four"></span> Seconds
+					</div>
                 </span>
             </p>
 
@@ -109,7 +117,7 @@
                 <h2>Contact</h2>
             </header>
             <p><b>Phone:</b> Please mail me. <br> <b>Email:</b> &nbsp <a
-                    href="mailto:zhaoma@bsc.cn">zhaoma@bsc.cn</a><br>
+                    href="mailto:zhaoma@bsc.cn">zhaoma[at]bsc[dot]cn</a><br>
             </p>
 
         </div>
@@ -119,4 +127,58 @@
     <p> Last updated in 6/2058</p>
 </div>
 </body>
+<script>
+        (function show() {      
+            //1.设置目的时间
+            var oYear = 2058
+            var oMonth = 6
+            var oDay = 1
+            var oHour = 0
+            var oMinute = 0
+            var oSecond = 0
+            var futureDate = new Date(oYear, oMonth, oDay, oHour, oMinute, oSecond);
+            // console.log(dateFormat(futureDate))
+            //2.设置定时器
+            setInterval(function () {
+                //3.获取现在的时间
+                var presentDate = new Date();
+                //4.获取时间戳
+                var futureTime = futureDate.getTime();
+                var presenTime = presentDate.getTime();
+				// console.log(dateFormat(futureDate))
+				// console.log(futureTime)
+                //5.获取剩余的时间戳
+                var allTime = futureTime - presenTime;          
+                //6.把毫秒转换为秒
+                var allSecond = parseInt(allTime / 1000);
+				var year = size(parseInt(allSecond / 3600 / 24 / 366))
+                //7.获取剩余多少天
+                var day = size(parseInt(allSecond / 3600 / 24));
+                //8.获取剩余多少小时
+                var hour = size(parseInt(allSecond / 3600 % 24));
+                //9.获取剩余多少分钟
+                var minute = size(parseInt(allSecond / 60 % 60));
+                //10.获取剩余多少秒
+                var second = size(parseInt(allSecond % 60));
+                //11.注入：
+				// document.getElementById('zero').innerHTML = year;
+                document.getElementById('one').innerHTML = day;
+                document.getElementById('two').innerHTML = hour;
+                document.getElementById('three').innerHTML = minute;
+                document.getElementById('four').innerHTML = second;
+            }, 1000);
+            //如果数>=10,则在前面补0
+            function size(num) {
+                return num < 10 & num >= 0 ? '0' + num : num;
+            }  
+        })()
+        //格式化日期格式 2
+        function dateFormat(data){
+            var date = new Date(data);
+            var YY = date.getFullYear() + '-';
+            var MM = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+            var DD = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate());
+            return YY + MM + DD;
+        }
+  </script>
 </html>
